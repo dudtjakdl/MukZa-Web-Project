@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>묵자</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
+    <!-- Bulma Version 0.9.0-->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css"
+    />
+    <style>
+      section {
+        border: solid;
+      }
+      .home-content {
+        margin: auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 33% 33% 34%;
+        grid-template-rows: 200px 200px;
+      }
+      .item1 {
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- START NAV -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="../">
+            <img src="img/logo.png" alt="Logo" />
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item"> 먹킷리스트 </a>
+            <a class="navbar-item"> 로그아웃 </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END NAV -->
+
+    <section class="hero is-info is-medium is-bold">
+      <div style="background: url(img/home.jpg)" class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">
+            나만의 맛집 관리를<br />더 편하게 더 알차게 MukZa!!
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <div class="home-content">
+      <section class="item1">지도 들어갈 곳</section>
+      <section class="item2">음식점 정보 들어갈 곳</section>
+      <section calss="item3">메모 들어갈 곳</section>
+    </div>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/js/OverlayScrollbars.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        //The first argument are the elements to which the plugin shall be initialized
+        //The second argument has to be at least a empty object or a object with your desired options
+        OverlayScrollbars(document.querySelectorAll("body"), {});
+      });
+    </script>
+  </body>
+</html>
