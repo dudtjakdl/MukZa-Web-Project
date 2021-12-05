@@ -57,8 +57,8 @@
         color: blue;
         font-weight: bold;
       }
-      .form-group{
-        margin:10px;
+      .form-group {
+        margin: 10px;
       }
       #post-box {
         width: 100%;
@@ -71,7 +71,7 @@
         margin: auto;
         width: 100%;
         display: grid;
-        grid-template-columns: 33% 33% 34%;
+        grid-template-columns: 40% 40% 20%;
         grid-template-rows: 400px 400px;
       }
       .item1 {
@@ -233,8 +233,6 @@
     </style>
   </head>
   <body>
-    
-
     <!-- START NAV -->
     <nav class="navbar">
       <div class="container">
@@ -295,7 +293,41 @@
         </div>
         <!-- <div id="map" style="width: 90%; height: 100%; margin: auto"></div> -->
       </section>
-      <section class="item2">음식점 정보 들어갈 곳</section>
+      <section class="item2">
+        <div
+          style="width: 100%; height: 100%; margin: auto"
+          class="card"
+          id="restaurant_info"
+        >
+          <div style="width: 100%; height: 48%" class="card-image">
+            <figure class="image is-4by3">
+              <img
+                style="width: 100%; height: 200px"
+                src="./static/img/food.jpg"
+                alt="Placeholder image"
+              />
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-4" id="restaurant_name">음식점 이름</p>
+                <p class="subtitle is-6">★★★★☆ 4.0/5.0</p>
+                <!-- <a href="#">자세한 정보 보러가기</a> -->
+              </div>
+            </div>
+
+            <div class="content">
+              <h id="restaurant_adress">주소: </h>
+              <br />
+              <h id="restaurant_phone">전화번호: </h>
+              <br />
+              <h id="restaurant_category">카테고리: </h>
+              <br />
+            </div>
+          </div>
+        </div>
+      </section>
       <section calss="item3">
         <div id="post-box" class="form-post">
           <!-- <button onclick="Remove_Category()">카테고리 제거</button> -->
@@ -338,7 +370,7 @@
               <option value="친구랑 가고싶은 곳">친구랑 가고싶은 곳</option>
             </select>
           </div>
-       
+
           <div class="form-group">
             <label for="post-url">위치</label>
             <input id="post-url" class="form-control" placeholder="" />
@@ -352,16 +384,18 @@
             ></textarea>
           </div>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" class="btn btn-primary" onclick="postArticle()">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="postArticle()"
+            >
               메모 등록
             </button>
           </div>
-          
-         
         </div>
       </section>
     </div>
     <script src="js/map.js"></script>
-    <script src="js/memo.js"></script>
+    <!-- <script src="js/memo.js"></script> -->
   </body>
 </html>

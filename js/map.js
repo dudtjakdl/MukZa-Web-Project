@@ -105,9 +105,21 @@ function displayPlaces(places) {
 
       kakao.maps.event.addListener(marker, "click", function () {
         // 마커 위에 인포윈도우를 표시합니다
-        console.log("마커 클릭");
-        console.log(marker);
-        console.log(keyword_list);
+        var markerIndex = keyword_list.documents.findIndex(
+          (x) => x.place_name === title
+        );
+        var placeObject = keyword_list.documents[markerIndex];
+        console.log(markerIndex);
+        console.log(placeObject);
+        var restaurantName = document.getElementById("restaurant_name");
+        var restaurantAdress = document.getElementById("restaurant_adress");
+        var restaurantPhone = document.getElementById("restaurant_phone");
+        var restaurantCategory = document.getElementById("restaurant_category");
+
+        restaurantName.innerText = title;
+        restaurantAdress.innerText = "주소: " + placeObject.address_name;
+        restaurantPhone.innerText = "전화번호: " + placeObject.phone;
+        restaurantCategory.innerText = "카테고리: " + placeObject.category_name;
       });
 
       itemEl.onmouseover = function () {
