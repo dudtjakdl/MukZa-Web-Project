@@ -26,7 +26,44 @@
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f4010efb825591322d7532cb417a79b&libraries=services"
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384s-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 구글폰트 -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Stylish&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      * {
+        font-family: "Stylish", sans-serif;
+      }
+      .wrap {
+        width: 900px;
+        margin: auto;
+      }
+      .comment {
+        color: blue;
+        font-weight: bold;
+      }
+      .form-group{
+        margin:10px;
+      }
+      #post-box {
+        width: 100%;
+        height: 100%;
+      }
       section {
         border: solid;
       }
@@ -196,6 +233,8 @@
     </style>
   </head>
   <body>
+    
+
     <!-- START NAV -->
     <nav class="navbar">
       <div class="container">
@@ -257,8 +296,72 @@
         <!-- <div id="map" style="width: 90%; height: 100%; margin: auto"></div> -->
       </section>
       <section class="item2">음식점 정보 들어갈 곳</section>
-      <section calss="item3">메모 들어갈 곳</section>
+      <section calss="item3">
+        <div id="post-box" class="form-post">
+          <!-- <button onclick="Remove_Category()">카테고리 제거</button> -->
+          <div id="category_select" class="container">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="추가하실 카테고리를 입력해주세요.."
+                id="selboxDirect"
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="button-addon2"
+                onclick="Add_Category()"
+              >
+                카테고리 추가
+              </button>
+            </div>
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="bu"
+              onclick="Remove_Category()"
+            >
+              카테고리 제거
+            </button>
+
+            <select
+              id="My_Category"
+              style="width: 100%; padding: 0%"
+              class="form-select"
+              aria-label=".form-select-sm example"
+            >
+              <option selected>Select Category</option>
+              <option value="데이트하기 좋은 곳">데이트하기 좋은 곳</option>
+              <option value="나만 알고싶은집..">나만 알고싶은집..</option>
+              <option value="친구랑 가고싶은 곳">친구랑 가고싶은 곳</option>
+            </select>
+          </div>
+       
+          <div class="form-group">
+            <label for="post-url">위치</label>
+            <input id="post-url" class="form-control" placeholder="" />
+          </div>
+          <div class="form-group">
+            <label for="post-comment">맛집 코멘트</label>
+            <textarea
+              id="post-comment"
+              class="form-control"
+              rows="2"
+            ></textarea>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-primary" onclick="postArticle()">
+              메모 등록
+            </button>
+          </div>
+          
+         
+        </div>
+      </section>
     </div>
     <script src="js/map.js"></script>
+    <script src="js/memo.js"></script>
   </body>
 </html>
