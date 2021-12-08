@@ -46,7 +46,10 @@
 			Kakao.API.request({
 			  url: '/v2/user/me',
 			  success: function (response) {
-				  console.log(response)
+         
+				  console.log(response);
+          console.log(response.id);  //response.id로 id 값 받아올 수 있음
+          console.log(response.properties.nickname); //nickname 받아올 수 있음
 			  },
 			  fail: function (error) {
 				console.log(error)
@@ -82,7 +85,7 @@
       "
     >
       <a onClick="window.location.reload()" style="cursor: pointer"
-        ><img style="height : 50px ; width : 150px;" src="/static/img/logo_font.png" 
+        ><img style="height : 50px ; width : 150px;" src="./static/img/logo_font.png" 
       /></a>
 
       <div class="hero-body">
