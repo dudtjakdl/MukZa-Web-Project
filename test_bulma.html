@@ -9,6 +9,11 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link rel="stylesheet" href="css/cardslider.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
       rel="stylesheet"
@@ -18,7 +23,7 @@
       rel="stylesheet"
       href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css"
     />
-    <link rel="stylesheet" type="text/css" href="../css/admin.css" />
+   
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>묵자</title>
@@ -63,7 +68,27 @@
       href="https://fonts.googleapis.com/css?family=Stylish&display=swap"
       rel="stylesheet"
     />
+    <!-- card 넘기기 내용-->
+    <script
+      src="http://nicesnippets.com/demo/jsCarousel-2.0.0.js"
+      type="text/javascript"
+    ></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <style>
+      .carousel-indicators li {
+        background-color: red;
+      }
+      .carousel-control-prev-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+      }
+
+      .carousel-control-next-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+      }
       * {
         font-family: "Stylish", sans-serif;
       }
@@ -118,6 +143,24 @@
     </section>
 
     <script>
+      function getCheckboxValue() {
+        // 선택된 목록 가져오기
+        const query = 'input[name="category"]:checked';
+        const selectedEls = document.querySelectorAll(query);
+
+        // 선택된 목록에서 value 찾기
+        let result = "";
+        selectedEls.forEach((el) => {
+          result += el.value + " ";
+        });
+
+        // 출력
+        document.getElementById("result").innerText = result;
+        console.log(result);
+
+        //document.getElementById(result+'_card').style.display='none';
+      }
+
       //전체보기 클릭시 모든 카테고리 클릭되도록 설정
       const selectAll = (selectAll) => {
         const checkboxes = document.getElementsByName("category");
@@ -125,26 +168,14 @@
         checkboxes.forEach((checkbox) => {
           checkbox.checked = selectAll.checked;
         });
+
+        getCheckboxValue();
       };
 
-      const add_textbox = () => {
-        const box = document.getElementById("box");
-
-        const new_select = document.createElement("input");
-        new_select.type = "checkbox";
-        new_select.id = "flexCheckIndeterminate"; //수정해야댈듯
-        new_select.value = "dfdrf";
-        new_select.innerHTML = "존맛집";
-        box.appendChild(new_select);
+      const remove = (e) => {
+        // onclick이 발생한 해당 객체의 부모노드 찾아 없애기
+        document.getElementById("delete" + e).parentNode.style.display = "none"; //<★☆★☆★
       };
-/*      const remove = (obj) => {
-        document.getElementById("box").removeChild(obj.parentNode);
-      };
-*/
-      
-      const remove= (e) => {        // onclick이 발생한 해당 객체의 부모노드 찾아 없애기
-        document.getElementById("delete"+e).parentNode.style.display="none"; //<★☆★☆★
-      }
 
       const Add_Category = () => {
         const addvalue = document.getElementById("selboxDirect").value;
@@ -167,7 +198,12 @@
         input.setAttribute("class", "form-check-input");
         input.setAttribute("name", "category");
         input.setAttribute("type", "checkbox");
+
+        //id 어떻게 할지 다시 확인
+
         input.setAttribute("id", "flexCheckIndeterminate");
+        input.setAttribute("value", addvalue);
+        input.setAttribute("onclick", "getCheckboxValue()");
 
         let label = document.createElement("label");
         label.setAttribute("class", "form-check-label");
@@ -249,15 +285,17 @@
                     전체보기
                   </label>
                 </div>
+
                 <ul id="My_list">
-                  <li>
+                  <li id="데이트하기 좋은 곳">
                     <div class="form-check">
                       <input
                         class="form-check-input"
                         name="category"
                         type="checkbox"
-                        value=""
-                        id="flexCheckIndeterminate"
+                        value="데이트하기 좋은 곳"
+                        id="데이트하기 좋은 곳_check"
+                        onclick="getCheckboxValue()"
                       />
                       <label
                         class="form-check-label"
@@ -267,31 +305,30 @@
                       </label>
                     </div>
                   </li>
-                  <li>
+                  <li id="갬성..">
                     <div class="form-check">
                       <input
                         class="form-check-input"
                         name="category"
                         type="checkbox"
-                        value=""
+                        value="갬성.."
                         id="flexCheckIndeterminate"
+                        onclick="getCheckboxValue()"
                       />
-                      <label
-                        class="form-check-label"
-                        for="flexCheckIndeterminate"
-                      >
+                      <label class="form-check-label" for="갬성_check">
                         갬성..
                       </label>
                     </div>
                   </li>
-                  <li>
+                  <li id="존맛 리스트_check">
                     <div class="form-check">
                       <input
                         class="form-check-input"
                         name="category"
                         type="checkbox"
-                        value=""
+                        value="존맛 리스트"
                         id="flexCheckIndeterminate"
+                        onclick="getCheckboxValue()"
                       />
                       <label
                         class="form-check-label"
@@ -301,14 +338,15 @@
                       </label>
                     </div>
                   </li>
-                  <li>
+                  <li id="꼭갈곳_check">
                     <div class="form-check">
                       <input
                         class="form-check-input"
                         name="category"
                         type="checkbox"
-                        value=""
+                        value="꼭갈곳"
                         id="flexCheckIndeterminate"
+                        onclick="getCheckboxValue()"
                       />
                       <label
                         class="form-check-label"
@@ -334,7 +372,635 @@
             </ul>
           </aside>
         </div>
-
+        <div class="column is-9">
+          <!-- <section class="item2"> -->
+          <div id="데이트하기 좋은 곳_card" style="display: block">
+            <div><h2>데이트하기 좋은곳</h2></div>
+            <div id="cards-box" class="card-columns">
+              <div class="row">
+                <div class="card-group">
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="갬성.._card" style="display: block">
+            <div><h2>갬성..</h2></div>
+            <div id="cards-box" class="card-columns">
+              <div class="row">
+                <div class="card-group">
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <img
+                        class="card-img-top"
+                        src="./static/img/logo_img.png"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <a target="_blank" href="#" class="card-title"
+                          >맛집 이름</a
+                        >
+                        <p class="card-text">맛집의 위치가 들어갑니다...</p>
+                        <p class="card-text comment">
+                          여기에 코멘트가 들어갑니다.
+                        </p>
+                        <!-- <p class="lead"> -->
+                        <button
+                          onclick="openClose()"
+                          id="btn-post-box"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          My Memo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <section class="my-5 bg-dark">
+            <div class="container">
+            <div class="col-xl-12">
+            <h2 class="text-center text-white">Carousel 4 Column Product Slider</h2>
+            </div>
+            
+              <div id="carouselFourColumn" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                <li data-target="#carouselFourColumn" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselFourColumn" data-slide-to="1"></li>
+                <li data-target="#carouselFourColumn" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="row">
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                 <div class="row">
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                <div class="row">
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-3 p-1">				
+                    <div class="card">
+                      <img src="https://via.placeholder.com/300x250" class="w-100">
+                      <div class="card-body">
+                      <h5 class="card-title">Product Name</h5>
+                      <p class="card-text">Product Description</p>
+                      <a href="#" class="btn btn-outline-success w-100">Show</a>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselFourColumn" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselFourColumn" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+                </a>
+              </div>
+              </div>	
+            </section>
+          <!-- </section> -->
+        </div>
         <!-- <div class="column is-9">
                 <nav class="breadcrumb" aria-label="breadcrumbs">
                     <ul>
@@ -511,6 +1177,22 @@
             </div> -->
       </div>
     </div>
-    <script async type="text/javascript" src="../js/bulma.js"></script>
+    <div id="result"></div>
+   
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
