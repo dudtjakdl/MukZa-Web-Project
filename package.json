@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/dudtjakdl/MukZa-Web-Project/issues"
   },
-  "homepage": "https://github.com/dudtjakdl/MukZa-Web-Project#readme"
+  "homepage": "https://github.com/dudtjakdl/MukZa-Web-Project#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.10",
+    "express": "^4.17.1",
+    "mongoose": "^6.1.1",
+    "request": "^2.88.2"
+  }
 }
