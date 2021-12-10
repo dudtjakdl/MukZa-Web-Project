@@ -235,39 +235,37 @@
   </head>
   <body>
     <script>
-      Add_Category= () => {
+      Add_Category = () => {
         let My_Category = document.querySelector("#My_Category");
         var objOption = document.createElement("option");
-        let cate= document.getElementById("selboxDirect").value;
-        
+        let cate = document.getElementById("selboxDirect").value;
+
         //버튼 클릭하면 비워줌
-        document.getElementById("selboxDirect").value="";
-        
-        if(cate==""){
+        document.getElementById("selboxDirect").value = "";
+
+        if (cate == "") {
           alert("등록할 카테고리를 입력해주세요!!");
-        }else{
-          if(My_Category.length>8){
+        } else {
+          if (My_Category.length > 8) {
             alert("8개 카테고리 모두 선택 완료..");
-          }else{
-            alert(cate+" 카테고리 등록 완료!!");
-            objOption.text=cate;
+          } else {
+            alert(cate + " 카테고리 등록 완료!!");
+            objOption.text = cate;
             //objOption.text = My_Category.length+1 + "번";
             objOption.value = cate;
-            My_Category.options.add(objOption); 
+            My_Category.options.add(objOption);
           }
         }
-      } 
+      };
 
-      Remove_Category=()=>{
-        
-        let my_select= $("#My_Category option:selected").val();
-        alert(my_select+" 카테고리 제거 완료!!")
+      Remove_Category = () => {
+        let my_select = $("#My_Category option:selected").val();
+        alert(my_select + " 카테고리 제거 완료!!");
         console.log(my_select);
-        $("#My_Category option[value='"+my_select+"']").remove();
-      }
-         
+        $("#My_Category option[value='" + my_select + "']").remove();
+      };
     </script>
-    
+
     <!-- START NAV -->
     <nav class="navbar">
       <div class="container">
@@ -400,9 +398,6 @@
               aria-label=".form-select-sm example"
             >
               <option selected>Select Category</option>
-              <option value="데이트하기 좋은 곳">데이트하기 좋은 곳</option>
-              <option value="나만 알고싶은집..">나만 알고싶은집..</option>
-              <option value="친구랑 가고싶은 곳">친구랑 가고싶은 곳</option>
             </select>
           </div>
 
@@ -419,14 +414,18 @@
             ></textarea>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="visit">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="visit"
+            />
             <label class="form-check-label" for="defaultCheck1">
               방문 여부
             </label>
           </div>
 
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-           
             <button
               type="button"
               class="btn btn-primary"
@@ -439,6 +438,29 @@
       </section>
     </div>
     <script src="js/map.js"></script>
+    <script>
+      $.ajax({
+        url: "http://localhost:1337/users/1",
+        type: "GET",
+        success: function (data) {
+          let category = data["categories"];
+          console.log(category);
+          console.log(category[0].name);
+          for (let i = 0; i < category.length; i++) {
+            let newOption = document.createElement("option");
+            let newValue = document.createAttribute("value");
+            let txtNode = document.createTextNode(category[i].name);
+            newOption.appendChild(txtNode);
+            newValue.value = category[i].name;
+            newOption.setAttributeNode(newValue);
+            document.getElementById("My_Category").appendChild(newOption);
+          }
+        },
+        error: function (e) {
+          console.log(e);
+        },
+      });
+    </script>
     <!-- <script src="js/memo.js"></script> -->
   </body>
 </html>
