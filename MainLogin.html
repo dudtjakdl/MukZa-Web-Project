@@ -4,14 +4,30 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login - Free Bulma template</title>
+    <title>MainLogin</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384s-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"> -->
     <link
-      href="https://fonts.googleapis.com/css?family=Questrial&display=swap"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
       rel="stylesheet"
     />
     <!-- Bulma Version 0.9.0-->
@@ -19,64 +35,56 @@
       rel="stylesheet"
       href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
   <body>
-	<ul>
-		<li onclick="kakaoLogin();">
-		  <a href="javascript:void(0)">
-			  <span>카카오 로그인</span>
-		  </a>
-		</li>
-		<li onclick="kakaoLogout();">
-		  <a href="javascript:void(0)">
-			  <span>카카오 로그아웃</span>
-		  </a>
-		</li>
-	</ul>
-	<!-- 카카오 스크립트 -->
-	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	<script>
-	Kakao.init('4f4010efb825591322d7532cb417a79b'); //발급받은 키 중 javascript키를 사용해준다.
-	console.log(Kakao.isInitialized()); // sdk초기화여부판단
-	//카카오로그인
-	function kakaoLogin() {
-		Kakao.Auth.login({
-		  success: function (response) {
-			Kakao.API.request({
-			  url: '/v2/user/me',
-			  success: function (response) {
-         
-				  console.log(response);
-          console.log(response.id);  //response.id로 id 값 받아올 수 있음
-          console.log(response.properties.nickname); //nickname 받아올 수 있음
-			  },
-			  fail: function (error) {
-				console.log(error)
-			  },
-			})
-		  },
-		  fail: function (error) {
-			console.log(error)
-		  },
-		})
-	  }
-	//카카오로그아웃  
-	function kakaoLogout() {
-		if (Kakao.Auth.getAccessToken()) {
-		  Kakao.API.request({
-			url: '/v1/user/unlink',
-			success: function (response) {
-				console.log(response)
-			},
-			fail: function (error) {
-			  console.log(error)
-			},
-		  })
-		  Kakao.Auth.setAccessToken(undefined)
-		}
-	  }  
-	</script>
+    <script>
+      const registration = () => {
+        axios
+        .post("http://localhost:1337/auth/local/register", {
+          username: "Strapiuser12",
+          email: "user35@strapi.io",
+          password: "strapiPassword",
+        })
+        .then((response) => {
+          // Handle success.
+          console.log("Well done!");
+          console.log("User profile", response.data.user);
+          console.log("User token", response.data.jwt);
+          alert('회원가입완료!');
+        })
+        .catch((error) => {
+          // Handle error.
+          console.log("An error occurred:", error.response);
+        });
+      };
+
+      const login = () => {
+        client_email = document.getElementById("client_email").value;
+        client_password = document.getElementById("client_password").value;
+
+        console.log(client_email);
+        // Request API.
+        axios
+          .post("http://localhost:1337/auth/local", {
+            identifier: client_email,
+            password: client_password,
+          })
+          .then((response) => {
+            // Handle success.
+            console.log("Well done!");
+            console.log("User profile", response.data.user);
+            console.log("User token", response.data.jwt);
+            alert("로그인 완료!");
+          })
+          .catch((error) => {
+            // Handle error.
+            console.log("An error occurred:", error.response);
+            alert('아이디를 확인해주세요..')
+          });
+      };
+    </script>
     <section
       class="hero is-success is-fullheight"
       style="
@@ -84,63 +92,125 @@
         background-size: 100% 100%;
       "
     >
-      <a onClick="window.location.reload()" style="cursor: pointer"
-        ><img style="height : 50px ; width : 150px;" src="./static/img/logo_font.png" 
-      /></a>
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" onclick="window.location.reload();">
+                <img src="./img/logo.png" alt="Logo" />
+              </a>
+              <span class="navbar-burger burger" data-target="navbarMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+              <div class="navbar-end">
+                <span class="navbar-item">
+                  <a class="button is-white is-outlined" href="#">
+                    <span class="icon">
+                      <i class="fa fa-home"></i>
+                    </span>
+                    <span>Home</span>
+                  </a>
+                </span>
+                <span class="navbar-item">
+                  <a class="button is-white is-outlined" href="#">
+                    <span class="icon">
+                      <i class="fa fa-superpowers"></i>
+                    </span>
+                    <span>Examples</span>
+                  </a>
+                </span>
+                <span class="navbar-item">
+                  <a class="button is-white is-outlined" href="#">
+                    <span class="icon">
+                      <i class="fa fa-book"></i>
+                    </span>
+                    <span>Documentation</span>
+                  </a>
+                </span>
+                <span class="navbar-item">
+                  <a
+                    class="button is-white is-outlined"
+                    href="https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/landing.html"
+                  >
+                    <span class="icon">
+                      <i class="fa fa-github"></i>
+                    </span>
+                    <span>View Source</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
 
       <div class="hero-body">
         <div class="container has-text-centered">
-          <div class="column is-4 is-offset-4">
-            <h3 class="title has-text-black">Login</h3>
+          <div class="column is-6 is-offset-3">
+            <h1 class="title">MukZa</h1>
+            <h2 class="subtitle">
+              $this is the best software platform for running an internet
+              business. We handle billions of dollars every year for
+              forward-thinking businesses around the world.
+            </h2>
             <hr class="login-hr" />
-            <p class="subtitle has-text-black">Please login to proceed.</p>
-            <div class="box">
-              <figure class="avatar">
-                <img
-                  src="./static/img/logo_img.png"
-                  style="height: 50px; width: 50px"
-                />
-              </figure>
-              <form>
-                <div class="field">
-                  <div class="control">
-                    <input
-                      class="input is-large"
-                      type="email"
-                      placeholder="Your Email"
-                      autofocus=""
-                    />
-                  </div>
-                </div>
-
-                <div class="field">
-                  <div class="control">
-                    <input
-                      class="input is-large"
-                      type="password"
-                      placeholder="Your Password"
-                    />
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="checkbox">
-                    <input type="checkbox" />
-                    Remember me
-                  </label>
-                </div>
-                <button class="button is-block is-info is-large is-fullwidth">
-                  Login <i class="fa fa-sign-in" aria-hidden="true"></i>
-                </button>
-              </form>
+            <!-- <div class="box"> -->
+            <!-- <form class="px-4 py-3"> -->
+            <div class="mb-3">
+              <label for="exampleDropdownFormEmail1" class="form-label"
+                >Email address</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="client_email"
+                placeholder="email@example.com"
+              />
             </div>
+            <div class="mb-3">
+              <label for="exampleDropdownFormPassword1" class="form-label"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="client_password"
+                placeholder="Password"
+              />
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="dropdownCheck"
+                />
+                <label class="form-check-label" for="dropdownCheck">
+                  Remember me
+                </label>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="login()">Sign in</button>
+
+            <!-- </form> -->
+            <!-- </div> -->
             <p class="has-text-grey">
-              <a href="../">Sign Up</a> &nbsp;·&nbsp;
-              <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+              <a onclick="registration()">회원가입</a> &nbsp;·&nbsp;
+              <a href="../">탈퇴하기</a> &nbsp;·&nbsp;
               <a href="../">Need Help?</a>
             </p>
           </div>
         </div>
       </div>
+      <footer>
+        <p>Copyright © 2021 KWANGWOON UNIVERSITY MUKZA. All rights reserved.</p>
+        <address>Contact webmaster for more information. 070-1234-5678</address>
+      </footer>
     </section>
   </body>
 </html>
