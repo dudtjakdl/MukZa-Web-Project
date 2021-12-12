@@ -108,8 +108,7 @@ function displayPlaces(places) {
         var markerIndex = keyword_list.documents.findIndex(
           (x) => x.place_name === title
         );
-        var placeObject = keyword_list.documents[markerIndex];
-        console.log(markerIndex);
+        placeObject = keyword_list.documents[markerIndex];
         console.log(placeObject);
         var restaurantName = document.getElementById("restaurant_name");
         var restaurantAdress = document.getElementById("restaurant_adress");
@@ -249,4 +248,46 @@ function removeAllChildNods(el) {
   while (el.hasChildNodes()) {
     el.removeChild(el.lastChild);
   }
+}
+
+document.getElementById("mukit_form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const comment = $("#post-comment").val();
+  const visit = $("#visit").is(":checked");
+  const category_name = $("#My_Category option:selected").val();
+
+  if (category_name == "Select Category") {
+    return alert("먹킷을 등록할 카테고리를 선택해주세요.");
+  }
+  try {
+    const restaurant_data = placeObject;
+    const category_data = await axios.get(
+      "http://localhost:1337/categories/" + encodeURIComponent(category_name)
+    );
+    await axios.post("http://localhost:1337/mukits", {
+      comment: comment,
+      visiting: visit,
+      restaurant: JSON.stringify(restaurant_data),
+      category_relation: [category_data.data.id],
+    });
+    alert("등록 되었습니다.");
+    resetVal();
+  } catch (err) {
+    console.error(err);
+    if (err.name === "ReferenceError") {
+      alert("먹킷을 등록할 마커를 선택해주세요.");
+    } else {
+      console.error(err);
+    }
+  }
+});
+
+async function resetVal() {
+  let el1 = document.getElementById("category_name");
+  let el2 = document.getElementById("post-comment");
+  let el3 = document.getElementById("visit");
+
+  el1.value = "";
+  el2.value = "";
+  el3.checked = false;
 }
