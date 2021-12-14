@@ -37,55 +37,20 @@
     />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/save_id.js"></script>
+    <script src="js/login.js"></script>
   </head>
 
   <body>
-    <script>
-
-      const login = () => {
-        userId = document.getElementById("userId").value;
-        userPassword = document.getElementById("userPassword").value;
-
-        console.log(userId);
-        // Request API.
-        axios
-          .post("http://localhost:1337/auth/local", {
-            identifier: userId,
-            password: userPassword,
-          })
-          .then((response) => {
-            // Handle success.
-            console.log("Well done!");
-            console.log("User profile", response.data.user);
-            console.log("User token", response.data.jwt);
-            //alert("로그인 완료!");
-
-            let user_id =response.data.user['id'];
-            console.log(user_id);
-
-          })
-          .catch((error) => {
-            // Handle error.
-            console.log("An error occurred:", error.response);
-            alert("아이디를 확인해주세요..");
-          });
-      };
-      if($('input:checkbox[id="remember_id"]').is(":checked") == true){
-        alert("remember");
-      }
-    </script>
-  
-    
     <section
       class="hero is-success is-fullheight"
       style="
-        background: url(static/img/login_main.png) no-repeat 0 0;
+        background: url(img/login_main.png) no-repeat 0 0;
         background-size: 100% 100%;
       "
     >
-    <h3 id="example"></h3>
+      <h3 id="example"></h3>
       <div class="hero-head">
-        <nav class="navbar">
+        <!-- <nav class="navbar">
           <div class="container">
             <div class="navbar-brand">
               <a class="navbar-item" onclick="window.location.reload();">
@@ -137,7 +102,7 @@
               </div>
             </div>
           </div>
-        </nav>
+        </nav> -->
       </div>
 
       <div class="hero-body">
@@ -145,17 +110,14 @@
           <div class="column is-6 is-offset-3">
             <h1 class="title">MukZa</h1>
             <h2 class="subtitle">
-              $this is the best software platform for running an internet
-              business. We handle billions of dollars every year for
-              forward-thinking businesses around the world.
+              MukZa는 나만의 맛집 리스트를 카테고리에 저장하여 관리할 수 있는
+              개인 맞춤 서비스입니다. 맛집 리스트를 편리하게 관리해보세요!
             </h2>
             <hr class="login-hr" />
             <!-- <div class="box"> -->
             <!-- <form class="px-4 py-3"> -->
             <div class="mb-3">
-              <label for="userId" class="form-label"
-                >Email address</label
-              >
+              <label for="userId" class="form-label">Email address</label>
               <input
                 type="email"
                 class="form-control"
@@ -164,9 +126,7 @@
               />
             </div>
             <div class="mb-3">
-              <label for="userPassword" class="form-label"
-                >Password</label
-              >
+              <label for="userPassword" class="form-label">Password</label>
               <input
                 type="password"
                 class="form-control"
@@ -191,9 +151,9 @@
 
             <!-- </form> -->
             <!-- </div> -->
-            <p class="has-text-grey">
-              <a href="./sign_up.html" target="_blank">회원가입</a> &nbsp;·&nbsp;
-              <a href="../">탈퇴하기</a> &nbsp;·&nbsp;
+            <p style="margin: 10px" class="has-text-grey">
+              <a href="/signup" target="_blank">회원가입</a>
+              &nbsp;·&nbsp; <a href="../">탈퇴하기</a> &nbsp;·&nbsp;
               <a href="../">Need Help?</a>
             </p>
           </div>
@@ -201,7 +161,6 @@
       </div>
       <footer>
         <p>Copyright © 2021 KWANGWOON UNIVERSITY MUKZA. All rights reserved.</p>
-        <address>Contact webmaster for more information. 070-1234-5678</address>
       </footer>
     </section>
   </body>

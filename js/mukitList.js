@@ -1,6 +1,6 @@
 async function getCheckbox() {
   $.ajax({
-    url: "http://localhost:1337/users/1",
+    url: "https://still-garden-11823.herokuapp.com/users/" + user_id,
     type: "GET",
     success: function (data) {
       let category = data["categories"];
@@ -33,16 +33,16 @@ async function getCheckbox() {
 }
 
 async function getCarousel() {
-  console.log("실험");
-
   try {
-    let user_data = await axios.get("http://localhost:1337/users/1");
+    let user_data = await axios.get(
+      "https://still-garden-11823.herokuapp.com/users/" + user_id
+    );
     let category = user_data["data"]["categories"];
 
     // 카테고리 수
     for (let i = 0; i < category.length; i++) {
       let mukit_data = await axios.get(
-        "http://localhost:1337/categories/" +
+        "https://still-garden-11823.herokuapp.com/categories/" +
           encodeURIComponent(category[i].name)
       );
       let mukit = mukit_data["data"]["mukits"];
@@ -51,8 +51,6 @@ async function getCarousel() {
       let elSec = document.createElement("section");
       elSec.className = "my-5 bg-dark";
       elSec.id = category[i].name;
-
-      console.log(mukit);
 
       let itemStr =
         '<div class="container">' +
@@ -180,8 +178,15 @@ const selectAll = (selectAll) => {
 };
 
 async function init() {
+  let url = window.location.href;
+  let arr = url.split("/");
+  user_id = arr[arr.length - 1];
+
+  document.getElementById("home_nav").href = "/home/" + user_id;
+  document.getElementById("mukit_nav").href = "/mukitlist/" + user_id;
+
   $.ajax({
-    url: "http://localhost:1337/users/1",
+    url: "https://still-garden-11823.herokuapp.com/users/" + user_id,
     type: "GET",
     success: function (data) {
       category_data = data["categories"];

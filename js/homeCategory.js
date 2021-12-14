@@ -1,6 +1,9 @@
 async function getCategory() {
+  let url = window.location.href;
+  let arr = url.split("/");
+  user_id = arr[arr.length - 1];
   $.ajax({
-    url: "http://localhost:1337/users/1",
+    url: "https://still-garden-11823.herokuapp.com/users/" + user_id,
     type: "GET",
     success: function (data) {
       user_data = data;
@@ -19,6 +22,8 @@ async function getCategory() {
       console.log(e);
     },
   });
+  document.getElementById("home_nav").href = "/home/" + user_id;
+  document.getElementById("mukit_nav").href = "/mukitlist/" + user_id;
 }
 async function removeCategory() {
   let listEl = document.getElementById("My_Category");
@@ -38,7 +43,7 @@ document
       return alert("추가할 카테고리를 입력하세요.");
     }
     try {
-      await axios.post("http://localhost:1337/categories", {
+      await axios.post("https://still-garden-11823.herokuapp.com/categories", {
         name: name,
         users_permissions_user: user_data,
       });
@@ -61,7 +66,8 @@ document
     }
     try {
       await axios.delete(
-        "http://localhost:1337/categories/" + encodeURIComponent(name)
+        "https://still-garden-11823.herokuapp.com/categories/" +
+          encodeURIComponent(name)
       );
       removeCategory();
       getCategory();

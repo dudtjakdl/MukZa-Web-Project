@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>회원가입 화면 샘플 - Bootstrap</title>
+    <title>회원가입</title>
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -57,16 +57,18 @@
         let email = document.getElementById("email").value;
         let password = document.getElementById("pswd2").value;
 
-        id=email.split('@')[0];
-       
+        id = email.split("@")[0];
+
         axios
-          .post("http://localhost:1337/auth/local/register", {
-           
-            clientname: name,
-            email: email,
-            password: password,
-            username: id,
-          })
+          .post(
+            "https://still-garden-11823.herokuapp.com/auth/local/register",
+            {
+              clientname: name,
+              email: email,
+              password: password,
+              username: id,
+            }
+          )
           .then((response) => {
             // Handle success.
             console.log("Well done!");
@@ -76,19 +78,17 @@
           })
           .catch((error) => {
             // Handle error.
-            
+
             console.log("An error occurred:", error.response);
             let er = Object.values(
               error.response["data"]["message"]["0"]["messages"]["0"]
             );
-            er=String(er);
-            er_ = er.split(',');
+            er = String(er);
+            er_ = er.split(",");
 
-            if(er_[1]="Email already taken"){
+            if ((er_[1] = "Email already taken")) {
               alert("중복된 이메일입니다. 다른 이메일을 입력해주세요!");
             }
-            
-           
           });
       };
     </script>
@@ -123,7 +123,6 @@
               <div class="invalid-feedback">이메일을 입력해주세요.</div>
             </div>
 
-            
             <div class="mb-3">
               <label for="pswd1">비밀번호</label>
               <input
