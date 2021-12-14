@@ -9,7 +9,6 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="css/cardslider.css" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -66,10 +65,10 @@
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- 구글폰트 -->
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css?family=Stylish&display=swap"
       rel="stylesheet"
-    />
+    /> -->
     <!-- card 넘기기 내용-->
     <script
       src="http://nicesnippets.com/demo/jsCarousel-2.0.0.js"
@@ -81,6 +80,7 @@
       type="text/css"
     />
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
       .carousel-indicators li {
         background-color: red;
       }
@@ -99,9 +99,6 @@
         margin: auto;
       }
 
-      section {
-        border: solid;
-      }
       .home-content {
         margin: auto;
         width: 100%;
@@ -116,8 +113,8 @@
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item" href="../">
-            <img src="img/logo.png" alt="Logo" />
+          <a class="navbar-item" id="home_nav">
+            <img src="/img/logo.png" alt="Logo" />
           </a>
           <span class="navbar-burger burger" data-target="navbarMenu">
             <span></span>
@@ -127,15 +124,15 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
           <div class="navbar-end">
-            <a class="navbar-item is-active"> 먹킷리스트 </a>
-            <a class="navbar-item"> 로그아웃 </a>
+            <a class="navbar-item is-active" id="mukit_nav"> 먹킷리스트 </a>
+            <a href="/" class="navbar-item"> 로그아웃 </a>
           </div>
         </div>
       </div>
     </nav>
 
     <section class="hero is-info is-medium is-bold">
-      <div style="background: url(img/home.jpg)" class="hero-body">
+      <div style="background: url(/img/home.jpg)" class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title">
             나만의 맛집 관리를<br />더 편하게 더 알차게 MukZa!!
@@ -332,17 +329,6 @@
                   </li> -->
                 </ul>
               </li>
-              <li><a>Invitations</a></li>
-              <li><a>Cloud Storage Environment Settings</a></li>
-              <li><a>Authentication</a></li>
-              <li><a>Payments</a></li>
-            </ul>
-            <p class="menu-label">Transactions</p>
-            <ul class="menu-list">
-              <li><a>Payments</a></li>
-              <li><a>Transfers</a></li>
-              <li><a>Balance</a></li>
-              <li><a>Reports</a></li>
             </ul>
           </aside>
         </div>
@@ -537,6 +523,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script src="js/mukitList.js"></script>
+    <script src="/js/mukitList.js"></script>
   </body>
 </html>

@@ -52,7 +52,6 @@ function placesSearchCB(data, status, pagination) {
       headers: { Authorization: "KakaoAK d36ca3a4af9e09910081edf201b1e2ed" },
       success: function (data) {
         keyword_list = data;
-        console.log("json 추출 완료");
       },
       error: function (e) {
         console.log(e);
@@ -262,9 +261,10 @@ document.getElementById("mukit_form").addEventListener("submit", async (e) => {
   try {
     const restaurant_data = placeObject;
     const category_data = await axios.get(
-      "http://localhost:1337/categories/" + encodeURIComponent(category_name)
+      "https://still-garden-11823.herokuapp.com/categories/" +
+        encodeURIComponent(category_name)
     );
-    await axios.post("http://localhost:1337/mukits", {
+    await axios.post("https://still-garden-11823.herokuapp.com/mukits", {
       comment: comment,
       visiting: visit,
       restaurant: JSON.stringify(restaurant_data),
