@@ -46,6 +46,9 @@ async function getCarousel() {
           encodeURIComponent(category[i].name)
       );
       let mukit = mukit_data["data"]["mukits"];
+
+      let comment = mukit[0]['comment'];
+      
       let card_num = mukit.length;
       let page_num = card_num / 8;
       let elSec = document.createElement("section");
@@ -83,7 +86,15 @@ async function getCarousel() {
         // 페이지 당 카드 수
         while (count < 8 && card_num !== 0) {
           let restaurant = JSON.parse(mukit[temp - card_num]["restaurant"]);
+          let memo = document.getElementById(
+            "message-text"
+          );
+          //console.log("message-text_" + restaurant["id"]);
+          //console.log(memo);
+         
+          memo.innerText = mukit["0"]["comment"];
 
+          //document.getElementById("modal_list").append='<div class="modal" id="myModal_'+restaurant["id"]+'" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" > <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="myModalLabel">New message</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button> </div> <div class="modal-body"> <form> <div class="mb-3"> <label for="message-text" class="col-form-label" >Memo:</label > <textarea class="form-control" id="message-text">'+mukit["0"]["comment"];+'</textarea> </div> </form> </div> <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" > Close </button> <button type="button" class="btn btn-primary"> Send message </button> </div> </div> </div> </div>'
           itemStr +=
             '          <div class="col-xl-3 p-1">' +
             '            <div class="card">' +
@@ -95,8 +106,9 @@ async function getCarousel() {
             '                <p style="height: 50px" class="card-text">' +
             restaurant["address_name"] +
             "</p>" +
-            '                <a href="#" class="btn btn-outline-success w-100">Show</a>' +
+            '                 <button type="button" class="btn btn-primary" data-toggle="modal" id="modal_btn" data-target="#exampleModal">My Memo</button>' +
             "</div></div></div>";
+            
           if (count === 3) {
             itemStr += "</div>" + '        <div class="row">';
           }
