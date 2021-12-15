@@ -18,6 +18,7 @@ async function getCheckbox() {
           idName +
           '_check" onclick="getCheckboxValue()"/>' +
           '<label class="form-check-label" for="flexCheckIndeterminate">' +
+          '&nbsp;&nbsp;&nbsp;' +
           category[i].name +
           "</label>";
 

@@ -201,6 +201,7 @@
         input.setAttribute("id", "flexCheckIndeterminate");
         input.setAttribute("value", addvalue);
         input.setAttribute("onclick", "getCheckboxValue()");
+       
 
         let label = document.createElement("label");
         label.setAttribute("class", "form-check-label");
@@ -208,6 +209,7 @@
         label.innerText = addvalue;
 
         div.append(input);
+
         div.append(label);
 
         li.append(div);
@@ -251,7 +253,7 @@
                     value="selectall"
                     id="flexCheckIndeterminate"
                     onclick="selectAll(this)"
-                  />
+                  />&nbsp;&nbsp;
                   <label class="form-check-label" for="flexCheckIndeterminate">
                     전체보기
                   </label>
@@ -327,27 +329,15 @@
     <script src="/js/mukitList.js"></script>
     <script>
       $("#myModal").on("show.bs.modal", function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var recipient = button.data("whatever"); // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var button = $(event.relatedTarget); 
+        var recipient = button.data("whatever"); 
+        
         var modal = $(this);
         modal.find(".modal-title").text("New message to " + recipient);
         modal.find(".modal-body input").val(recipient);
       });
 
-      $("#btnsend").on("click", function () {
-        console.log("Pinchado");
-        console.log(recipient);
-      });
-
-      $("#btnclose").on("click", function () {
-        console.log("Cerrando...");
-      });
-
-      $("#exampleModal").on("hidden.bs.modal", function (e) {
-        console.log("Cerrada");
-      });
+     
     </script>
   </body>
 </html>
