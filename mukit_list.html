@@ -5,14 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>묵자</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css"
+    />
+
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
       rel="stylesheet"
@@ -84,6 +107,12 @@
       .carousel-indicators li {
         background-color: red;
       }
+      .carousel-control-prev {
+        width: 3%;
+      }
+      .carousel-control-next {
+        width: 3%;
+      }
       .carousel-control-prev-icon {
         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
       }
@@ -152,8 +181,6 @@
 
         let My_Category = document.getElementById("My_list");
 
-        //let gogo="<li><div class='form-check'><input class='form-check-input' name='category' type='checkbox' id='flexCheckIndeterminate'/> <label class='form-check-label' for='flexCheckIndeterminate'>"+addvalue+"</label></div></li>";
-
         // 추가할 li element 생성
         let li = document.createElement("li");
         // li에 id 속성 추가
@@ -186,24 +213,6 @@
         li.append(div);
 
         My_Category.append(li);
-
-        /*
-        //버튼 클릭하면 비워줌
-        document.getElementById("selboxDirect").value = "";
-
-        if (cate == "") {
-          alert("등록할 카테고리를 입력해주세요!!");
-        } else {
-          if (My_Category.length > 8) {
-            alert("8개 카테고리 모두 선택 완료..");
-          } else {
-            alert(cate + " 카테고리 등록 완료!!");
-            objOption.text = cate;
-            //objOption.text = My_Category.length+1 + "번";
-            objOption.value = cate;
-            My_Category.options.add(objOption);
-          }
-        }*/
       };
     </script>
 
@@ -230,17 +239,8 @@
       <div class="columns">
         <div class="column is-3">
           <aside class="menu is-hidden-mobile">
-            <!-- <p class="menu-label">
-                        General
-                    </p>
-                    <ul class="menu-list">
-                        <li><a class="is-active">Dashboard</a></li>
-                        <li><a>Customers</a></li>
-                        <li><a>Other</a></li>
-                    </ul> -->
             <p class="menu-label">Administration</p>
             <ul class="menu-list">
-              <!-- <li><a>Team Settings</a></li> -->
               <li>
                 <div class="form-check">
                   <input
@@ -257,259 +257,60 @@
                   </label>
                 </div>
 
-                <ul id="my_category">
-                  <!-- <li id="category1">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        name="category"
-                        type="checkbox"
-                        value="데이트하기 좋은 곳"
-                        id="category1_check"
-                        onclick="getCheckboxValue()"
-                      />
-                      <label
-                        class="form-check-label"
-                        for="flexCheckIndeterminate"
-                      >
-                        데이트하기 좋은 곳
-                      </label>
-                    </div>
-                  </li>
-                  <li id="갬성..">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        name="category"
-                        type="checkbox"
-                        value="갬성.."
-                        id="flexCheckIndeterminate"
-                        onclick="getCheckboxValue()"
-                      />
-                      <label class="form-check-label" for="갬성_check">
-                        갬성..
-                      </label>
-                    </div>
-                  </li>
-                  <li id="존맛 리스트_check">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        name="category"
-                        type="checkbox"
-                        value="존맛 리스트"
-                        id="flexCheckIndeterminate"
-                        onclick="getCheckboxValue()"
-                      />
-                      <label
-                        class="form-check-label"
-                        for="flexCheckIndeterminate"
-                      >
-                        존맛 리스트
-                      </label>
-                    </div>
-                  </li>
-                  <li id="꼭갈곳_check">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        name="category"
-                        type="checkbox"
-                        value="꼭갈곳"
-                        id="flexCheckIndeterminate"
-                        onclick="getCheckboxValue()"
-                      />
-                      <label
-                        class="form-check-label"
-                        for="flexCheckIndeterminate"
-                      >
-                        꼭갈곳
-                      </label>
-                    </div>
-                  </li> -->
-                </ul>
+                <ul id="my_category"></ul>
               </li>
             </ul>
           </aside>
         </div>
-        <div class="column is-9" id="mukit_list">
-          <!-- <section class="item2"> -->
-          <!-- </section> -->
+        <div class="column is-9" id="mukit_list"></div>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+               
+              </div>
+              <div class="modal-body">
+                <form>
+                 
+                  <div class="form-group">
+                    <label for="message-text" class="control-label"
+                      >Message:</label
+                    >
+                    <textarea class="form-control" id="message-text"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-default"
+                  id="btnclose"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" id="btnsend" class="btn btn-primary">
+                  Send message
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- <div class="column is-9">
-                <nav class="breadcrumb" aria-label="breadcrumbs">
-                    <ul>
-                        <li><a href="../">Bulma</a></li>
-                        <li><a href="../">Templates</a></li>
-                        <li><a href="../">Examples</a></li>
-                        <li class="is-active"><a href="#" aria-current="page">Admin</a></li>
-                    </ul>
-                </nav>
-                <section class="hero is-info welcome is-small">
-                    <div class="hero-body">
-                        <div class="container">
-                            <h1 class="title">
-                                Hello, Admin.
-                            </h1>
-                            <h2 class="subtitle">
-                                I hope you are having a great day!
-                            </h2>
-                        </div>
-                    </div>
-                </section>
-                <section class="info-tiles">
-                    <div class="tile is-ancestor has-text-centered">
-                        <div class="tile is-parent">
-                            <article class="tile is-child box">
-                                <p class="title">439k</p>
-                                <p class="subtitle">Users</p>
-                            </article>
-                        </div>
-                        <div class="tile is-parent">
-                            <article class="tile is-child box">
-                                <p class="title">59k</p>
-                                <p class="subtitle">Products</p>
-                            </article>
-                        </div>
-                        <div class="tile is-parent">
-                            <article class="tile is-child box">
-                                <p class="title">3.4k</p>
-                                <p class="subtitle">Open Orders</p>
-                            </article>
-                        </div>
-                        <div class="tile is-parent">
-                            <article class="tile is-child box">
-                                <p class="title">19</p>
-                                <p class="subtitle">Exceptions</p>
-                            </article>
-                        </div>
-                    </div>
-                </section>
-                <div class="columns">
-                    <div class="column is-6">
-                        <div class="card events-card">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    Events
-                                </p>
-                                <a href="#" class="card-header-icon" aria-label="more options">
-                  <span class="icon">
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                </a>
-                            </header>
-                            <div class="card-table">
-                                <div class="content">
-                                    <table class="table is-fullwidth is-striped">
-                                        <tbody>
-                                            <tr>
-                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                <td>Lorum ipsum dolem aire</td>
-                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                <td>Lorum ipsum dolem aire</td>
-                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                <td>Lorum ipsum dolem aire</td>
-                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                <td>Lorum ipsum dolem aire</td>
-                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                <td>Lorum ipsum dolem aire</td>
-                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                <td>Lorum ipsum dolem aire</td>
-                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                <td>Lorum ipsum dolem aire</td>
-                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                <td>Lorum ipsum dolem aire</td>
-                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                <td>Lorum ipsum dolem aire</td>
-                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <footer class="card-footer">
-                                <a href="#" class="card-footer-item">View All</a>
-                            </footer>
-                        </div>
-                    </div>
-                    <div class="column is-6">
-                        <div class="card">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    Inventory Search
-                                </p>
-                                <a href="#" class="card-header-icon" aria-label="more options">
-                  <span class="icon">
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                </a>
-                            </header>
-                            <div class="card-content">
-                                <div class="content">
-                                    <div class="control has-icons-left has-icons-right">
-                                        <input class="input is-large" type="text" placeholder="">
-                                        <span class="icon is-medium is-left">
-                      <i class="fa fa-search"></i>
-                    </span>
-                                        <span class="icon is-medium is-right">
-                      <i class="fa fa-check"></i>
-                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    User Search
-                                </p>
-                                <a href="#" class="card-header-icon" aria-label="more options">
-                  <span class="icon">
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                </a>
-                            </header>
-                            <div class="card-content">
-                                <div class="content">
-                                    <div class="control has-icons-left has-icons-right">
-                                        <input class="input is-large" type="text" placeholder="">
-                                        <span class="icon is-medium is-left">
-                      <i class="fa fa-search"></i>
-                    </span>
-                                        <span class="icon is-medium is-right">
-                      <i class="fa fa-check"></i>
-                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
       </div>
     </div>
 
@@ -524,5 +325,29 @@
       crossorigin="anonymous"
     ></script>
     <script src="/js/mukitList.js"></script>
+    <script>
+      $("#myModal").on("show.bs.modal", function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var recipient = button.data("whatever"); // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this);
+        modal.find(".modal-title").text("New message to " + recipient);
+        modal.find(".modal-body input").val(recipient);
+      });
+
+      $("#btnsend").on("click", function () {
+        console.log("Pinchado");
+        console.log(recipient);
+      });
+
+      $("#btnclose").on("click", function () {
+        console.log("Cerrando...");
+      });
+
+      $("#exampleModal").on("hidden.bs.modal", function (e) {
+        console.log("Cerrada");
+      });
+    </script>
   </body>
 </html>
